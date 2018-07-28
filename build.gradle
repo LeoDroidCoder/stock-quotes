@@ -1,0 +1,74 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlinVersion = '1.2.30'
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+        maven { url "https://mint.splunk.com/gradle/" }
+        maven { url "https://jitpack.io" }
+    }
+
+
+    ext {
+        //Android
+        androidApplicationId = "com.leodroidcoder.stockqoutes"
+        androidVersionCode = 1
+        androidVersionName = "0.1.0"
+        androidMinSdkVersion = 16
+        androidTargetSdkVersion = 27
+        androidCompileSdkVersion = 27
+        androidBuildToolsVersion = '27.0.3'
+
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testApplicationId = "com.leodroidcoder.stockqoutes.test"
+
+
+        //Libraries
+        rxJavaVersion = '2.1.11'
+        rxAndroidVersion = '2.0.2'
+        roomVersion = '1.1.1'
+        daggerVersion = '2.15'
+        javaWebsocketVersion = '1.3.3'
+        gsonVersion = '2.8.1'
+        supportLibVersion = '27.1.1'
+        constraintLayoutVersion = '1.1.0'
+        moxyVersion = '1.5.3'
+        ciceroneVersion = '2.0.0'
+        genericAdapterVersion = '1.0.1'
+        mpAndroidChartVersion = 'v3.0.3'
+
+        //Testing
+        jUnitVersion = '4.12'
+        assertJVersion = '1.7.1'
+        dexmakerVersion = '1.0'
+        espressoVersion = '2.0'
+        testingSupportLibVersion = '0.1'
+        mockitoVersion = '2.8.9'
+
+        //Development
+        timberVersion = '4.7.0'
+        leakCanaryVersion = '1.5.1'
+        mintVersion = '5.0.0'
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

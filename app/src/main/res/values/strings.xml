@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">StockQuotes</string>
+
+
+    <string name="error_message_generic">An error occurred.\nTry again later or contact support</string>
+    <string name="error_message_network">Check Internet connection</string>
+    <string name="title_main_screen">Main screen</string>
+    <string name="title_details_screen">Details</string>
+
+    <string name="format_bid_ask">%1$f / %2$f</string>
+</resources>

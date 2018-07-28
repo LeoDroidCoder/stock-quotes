@@ -1,0 +1,62 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+dependencies {
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    // WebSockets
+    implementation "org.java-websocket:java-websocket:$javaWebsocketVersion"
+    implementation 'com.neovisionaries:nv-websocket-client:2.5'
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // MVP
+    implementation "com.arello-mobile:moxy:$moxyVersion"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    implementation "ru.terrakok.cicerone:cicerone:$ciceroneVersion"
+
+    // Support and UI
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:support-annotations:$supportLibVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "com.leodroidcoder:generic-adapter:$genericAdapterVersion"
+    implementation "com.github.philjay:mpandroidchart:$mpAndroidChartVersion"
+//    implementation "com.github.PhilJay:MPAndroidChart:$mpAndroidChartVersion"
+
+    // Testing
+    testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation('com.nhaarman:mockito-kotlin:1.5.0') {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test:testing-support-lib:$testingSupportLibVersion"
+
+    //Development
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    implementation "com.splunk.mint:mint:$mintVersion"
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+}

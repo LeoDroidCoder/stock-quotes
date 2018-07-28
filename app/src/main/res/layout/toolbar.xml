@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Text.Heading"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:ellipsize="end"
+        android:paddingLeft="?actionBarSize"
+        android:paddingRight="?actionBarSize"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title"/>
+
+    <ImageButton
+        android:id="@+id/btn_toolbar_back"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="@dimen/button_toolbar_height"
+        android:layout_height="@dimen/button_toolbar_height"
+        android:layout_marginLeft="@dimen/spacing_small"
+        android:layout_marginRight="@dimen/spacing_small"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp"
+        />
+
+    <View
+        style="@style/ToolbarShadow"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        />
+
+</android.support.constraint.ConstraintLayout>
