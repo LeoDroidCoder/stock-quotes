@@ -2,6 +2,12 @@ package com.leodroidcoder.stockqoutes.domain.entity
 
 import java.util.*
 
+/**
+ * Domain-layer Tick model.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
 data class Tick(
         val id: Long? = null,
         val symbol: String,

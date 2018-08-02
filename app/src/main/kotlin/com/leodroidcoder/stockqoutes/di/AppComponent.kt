@@ -9,7 +9,12 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
-
+/**
+ * Dagger application component class.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
 @Singleton
 @Component(modules = [
     AppModule::class,

@@ -41,7 +41,9 @@ class QuoteViewHolder(
     }
 
     /**
-     * Process payloads and update only views which were changed
+     * Process payloads and update only the views which were changed
+     *
+     * @since 1.0.0
      */
     private fun processPayloads(payloads: List<Any>, item: Tick) {
         payloads.forEach {

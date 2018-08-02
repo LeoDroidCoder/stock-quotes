@@ -30,8 +30,8 @@ allprojects {
         //Android
         androidApplicationId = "com.leodroidcoder.stockqoutes"
         androidVersionCode = 1
-        androidVersionName = "0.1.0"
-        androidMinSdkVersion = 16
+        androidVersionName = "1.0.0"
+        androidMinSdkVersion = 17
         androidTargetSdkVersion = 27
         androidCompileSdkVersion = 27
         androidBuildToolsVersion = '27.0.3'
@@ -45,7 +45,7 @@ allprojects {
         rxAndroidVersion = '2.0.2'
         roomVersion = '1.1.1'
         daggerVersion = '2.15'
-        javaWebsocketVersion = '1.3.3'
+        websocketVersion = '2.5'
         gsonVersion = '2.8.1'
         supportLibVersion = '27.1.1'
         constraintLayoutVersion = '1.1.0'
@@ -61,11 +61,13 @@ allprojects {
         espressoVersion = '2.0'
         testingSupportLibVersion = '0.1'
         mockitoVersion = '2.8.9'
+        mockitoKotlinVersion = '1.5.0'
 
         //Development
         timberVersion = '4.7.0'
         leakCanaryVersion = '1.5.1'
         mintVersion = '5.0.0'
+        debugDbVersion = '1.0.4'
     }
 }
 

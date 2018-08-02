@@ -12,12 +12,17 @@ import com.leodroidcoder.stockqoutes.domain.entity.Tick
 import com.leodroidcoder.stockqoutes.presentation.base.BaseFragment
 import com.leodroidcoder.stockqoutes.presentation.quotes.adapter.QuoteAdapter
 import kotlinx.android.synthetic.main.fragment_quotes.*
-import kotlinx.android.synthetic.main.view_bar.*
-import timber.log.Timber
 
 
 /**
- * Created by leonid on 9/26/17.
+ * Symbols screen Fragment.
+ * Shows summary of the currency pairs, for which updates user is subscribed.
+ *
+ * Receives data from the presenter [QuotesPresenter] and shows it.
+ * Passes user interaction events to presenter.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 class QuotesFragment : BaseFragment<QuotesMvpView, QuotesPresenter>(), QuotesMvpView, OnRecyclerItemClickListener {
 
@@ -35,15 +40,18 @@ class QuotesFragment : BaseFragment<QuotesMvpView, QuotesPresenter>(), QuotesMvp
          * Supply it with the arguments if needed.
          *
          * @return new instance of current fragment.
+         *
+         * @since 1.0.0
          */
         fun newInstance() = QuotesFragment()
-
     }
 
     /**
      * Provide layout resource id to parent.
      *
      * @see onCreateView
+     *
+     * @since 1.0.0
      */
     override fun getLayoutResId() = R.layout.fragment_quotes
 
@@ -54,22 +62,30 @@ class QuotesFragment : BaseFragment<QuotesMvpView, QuotesPresenter>(), QuotesMvp
 
     private fun setupViews() {
         fab_add?.setOnClickListener { presenter.onSymbolsClick() }
-        btn_toolbar_back?.visibility = View.GONE
-        tv_title?.text = getString(R.string.title_main_screen)
+        cb_symbol?.setOnClickListener { presenter.onSymbolsOrderCheck(cb_symbol.isChecked) }
         rv_quotes?.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
         rv_quotes?.setHasFixedSize(true)
         rv_quotes?.layoutManager = LinearLayoutManager(context)
         rv_quotes?.adapter = adapter
     }
 
+    override fun setupToolbar(title: String, backEnabled: Boolean) {
+        setToolbar(getString(R.string.app_name), backEnabled)
+    }
+
     /**
-     * Populate adapter with data
+     * Populate adapter with data.
+     *
+     * @since 1.0.0
      */
     override fun showData(ticks: List<Tick>) {
-//        adapter.updateItems(ticks)
-        //todo
-        Timber.d("showData $ticks")
-        adapter.items = ticks
+        checkEmptyViewAppearance(ticks.isEmpty())
+        adapter.updateItems(ticks)
+    }
+
+    private fun checkEmptyViewAppearance(empty: Boolean) {
+        gr_recycler?.visibility = if (empty) View.GONE else View.VISIBLE
+        tv_empty?.visibility = if (empty) View.VISIBLE else View.GONE
     }
 
     /**
@@ -88,16 +104,5 @@ class QuotesFragment : BaseFragment<QuotesMvpView, QuotesPresenter>(), QuotesMvp
     override fun onBackButtonPressed(): Boolean {
         presenter.onBackPressed()
         return false
-    }
-
-    /**
-     * An error occurred.
-     *
-     * @param errorCode code
-     * @see [ErrorCodes]
-     */
-    override fun onError(errorCode: Int) {
-        //todo move this logic to presenter
-        handleError(errorCode)
     }
 }

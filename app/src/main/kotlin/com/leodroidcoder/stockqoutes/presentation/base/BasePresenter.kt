@@ -6,17 +6,50 @@ import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
 /**
- * Created by leonid on 9/26/17.
+ * Base Presenter class.
+ * Provides common functionality for all the Presenters in the application.
+ *
+ * @see BaseMvpView
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 abstract class BasePresenter<V : BaseMvpView>(private val router: Router?) : MvpPresenter<V>() {
 
+    /**
+     * Is cleared in [detachView].
+     * You should correspondingly add disposables in [attachView]
+     *
+     * @since 1.0.0
+     */
     protected val compositeDisposable = CompositeDisposable()
 
-    override fun destroyView(view: V) {
-        super.destroyView(view)
+    override fun attachView(view: V) {
+        super.attachView(view)
+        setTitle()
+    }
+
+    /**
+     * Default implementation.
+     * Override it in a subclass in order to pass title from presenter
+     *
+     * @since 1.0.0
+     */
+    protected open fun setTitle() {
+        viewState?.setupToolbar()
+    }
+
+    override fun detachView(view: V) {
+        super.detachView(view)
         compositeDisposable.clear()
     }
 
+    /**
+     * Default onError implementation.
+     * Prints error stacktrace.
+     *
+     * @since 1.0.0
+     */
     protected fun defaultOnError(t: Throwable) {
         Timber.d(t)
     }
@@ -24,7 +57,7 @@ abstract class BasePresenter<V : BaseMvpView>(private val router: Router?) : Mvp
     /**
      * Move to the previous screen when back button was pressed.
      *
-     * @since 0.1.0
+     * @since 1.0.0
      */
     fun onBackPressed() {
         router?.exit()

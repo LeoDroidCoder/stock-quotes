@@ -1,11 +1,16 @@
 <resources>
-    <string name="app_name">StockQuotes</string>
+    <string name="app_name">Stock Quotes</string>
 
-
-    <string name="error_message_generic">An error occurred.\nTry again later or contact support</string>
-    <string name="error_message_network">Check Internet connection</string>
-    <string name="title_main_screen">Main screen</string>
-    <string name="title_details_screen">Details</string>
-
+    <string name="title_symbols">Currency pairs</string>
     <string name="format_bid_ask">%1$f / %2$f</string>
+
+    <string name="title_symbol">Symbol</string>
+    <string name="title_bid_ask">BID / ASK</string>
+    <string name="title_spread">Spread</string>
+    <string name="chart_legend_ask">Ask</string>
+    <string name="chart_legend_bid">Bid</string>
+
+    <string name="text_empty_quotes">No quotes selected. \nAdd any by pressing the button below</string>
+    <string name="text_not_connected">Not connected</string>
+
 </resources>

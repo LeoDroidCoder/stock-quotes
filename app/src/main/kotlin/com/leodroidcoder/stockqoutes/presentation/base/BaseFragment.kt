@@ -4,13 +4,12 @@ import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.leodroidcoder.stockqoutes.domain.common.ErrorCodes
-import com.leodroidcoder.stockqoutes.domain.common.ErrorMessageFactory
-import com.leodroidcoder.stockqoutes.presentation.common.navigation.BackButtonListener
+import com.leodroidcoder.stockqoutes.presentation.navigation.BackButtonListener
 import dagger.Lazy
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -19,7 +18,11 @@ import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 /**
- * Created by leonid on 9/26/17.
+ * Base Fragment class.
+ * Provides common functionality for all the Fragments in application.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 abstract class BaseFragment<V : BaseMvpView, P : BasePresenter<V>> : MvpAppCompatFragment(),
         HasFragmentInjector, BackButtonListener {
@@ -27,8 +30,7 @@ abstract class BaseFragment<V : BaseMvpView, P : BasePresenter<V>> : MvpAppCompa
     @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
     @Inject lateinit var lazyPresenter: Lazy<P>
 
-    @LayoutRes
-    protected abstract fun getLayoutResId(): Int
+    @LayoutRes protected abstract fun getLayoutResId(): Int
 
     override fun fragmentInjector(): AndroidInjector<Fragment>? {
         return childFragmentInjector
@@ -43,26 +45,15 @@ abstract class BaseFragment<V : BaseMvpView, P : BasePresenter<V>> : MvpAppCompa
         return inflater.inflate(getLayoutResId(), container, false)
     }
 
-    /**
-     * Retrieves error message by error code and shows it.
-     * Delegates to the basse activity [BaseActivity]
-     *
-     * @param errorCode error code
-     * @see [ErrorCodes]
-     * @see [ErrorMessageFactory]
-     */
-    protected fun handleError(errorCode: Int) {
-        (activity as? BaseActivity<*, *>)?.handleError(errorCode)
+    protected fun setToolbar(toolbarTitle: String, backEnabled: Boolean) {
+        (activity as? AppCompatActivity)?.supportActionBar?.run {
+            title = toolbarTitle
+            setDisplayHomeAsUpEnabled(backEnabled)
+        }
     }
 
-    /**
-     * Shows Toast message.
-     * Delegates to the basse activity [BaseActivity]
-     *
-     * @param message to show
-     */
-    protected fun showMessage(message: String) {
-        (activity as? BaseActivity<*, *>)?.showMessage(message)
+    override fun onBackButtonPressed(): Boolean {
+        lazyPresenter.get().onBackPressed()
+        return true
     }
-
 }

@@ -27,7 +27,7 @@
         app:layout_constraintStart_toEndOf="@+id/tv_symbol"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="@dimen/column_width_percent_bid_ask"
-        tools:text="BID/ASK" />
+        tools:text="1.000011 / 1.000012" />
 
 
     <TextView

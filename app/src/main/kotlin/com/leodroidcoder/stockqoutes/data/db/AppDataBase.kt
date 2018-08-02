@@ -5,10 +5,21 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import com.leodroidcoder.stockqoutes.data.db.entity.TickDbEntity
 
-@Database(entities = arrayOf(TickDbEntity::class), version = 1)
+/**
+ * Application database
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
+@Database(entities = [(TickDbEntity::class)], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
 
-    internal abstract fun tickDao(): TickDao
+    /**
+     * Get Ticks data access object.
+     *
+     * @since 1.0.0
+     */
+    abstract fun tickDao(): TickDao
 
 }

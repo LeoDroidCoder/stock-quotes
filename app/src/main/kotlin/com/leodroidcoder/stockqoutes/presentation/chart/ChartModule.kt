@@ -6,6 +6,13 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 
+/**
+ * Chart screen Dagger module.
+ * Used to provide screen-related dependencies, such as Presenter
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
 @Module
 class ChartModule {
 

@@ -8,6 +8,13 @@ import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.leodroidcoder.stockqoutes.R
 import com.leodroidcoder.stockqoutes.domain.entity.Tick
 
+/**
+ * Quotes adapter.
+ * Performs efficient item updates wit use of DiffUtil and payloads.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
 class QuoteAdapter(context: Context?, listener: OnRecyclerItemClickListener) : GenericRecyclerViewAdapter<Tick,
         OnRecyclerItemClickListener, QuoteViewHolder>(context, listener) {
 
@@ -17,6 +24,8 @@ class QuoteAdapter(context: Context?, listener: OnRecyclerItemClickListener) : G
 
     /**
      * Perform smart items update
+     *
+     * @since 1.0.0
      */
     override fun updateItems(newItems: List<Tick>) {
         val result = DiffUtil.calculateDiff(QuoteDiffCallback(items, newItems))

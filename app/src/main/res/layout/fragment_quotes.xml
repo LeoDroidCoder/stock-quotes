@@ -5,9 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/v_bar"
-        layout="@layout/view_bar" />
+    <CheckBox
+        android:id="@+id/cb_symbol"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height_normal"
+        android:button="@drawable/btn_check_sort"
+        android:gravity="center"
+        android:layoutDirection="rtl"
+        android:text="@string/title_symbol"
+        android:textAppearance="@style/TextAppearanceTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="@dimen/column_width_percent_symbol" />
+
+    <TextView
+        android:id="@+id/tv_bid_ask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/title_bid_ask"
+        android:textAppearance="@style/TextAppearanceTitle"
+        app:layout_constraintBottom_toBottomOf="@id/cb_symbol"
+        app:layout_constraintEnd_toStartOf="@+id/tv_spread"
+        app:layout_constraintStart_toEndOf="@+id/cb_symbol"
+        app:layout_constraintTop_toTopOf="@id/cb_symbol"
+        app:layout_constraintWidth_percent="@dimen/column_width_percent_bid_ask" />
+
+    <TextView
+        android:id="@+id/tv_spread"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/title_spread"
+        android:textAppearance="@style/TextAppearanceTitle"
+        app:layout_constraintBottom_toBottomOf="@id/cb_symbol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cb_symbol"
+        app:layout_constraintWidth_percent="@dimen/column_width_percent_spread" />
+
+    <View
+        android:id="@+id/div"
+        style="@style/Divider"
+        app:layout_constraintTop_toBottomOf="@id/cb_symbol" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_quotes"
@@ -17,9 +56,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v_bar"
+        app:layout_constraintTop_toBottomOf="@id/div"
         tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_quote" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/text_empty_quotes"
+        android:textAppearance="@style/TextAppearanceTitle"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gr_recycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cb_symbol,tv_bid_ask,tv_spread,div,rv_quotes"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"

@@ -5,4 +5,7 @@
     <color name="colorAccent">#FFFFD001</color>
 
     <color name="white">#FFFFFF</color>
+
+    <color name="color_chart_ask">#095bff</color>
+    <color name="color_chart_bid">#f71616</color>
 </resources>

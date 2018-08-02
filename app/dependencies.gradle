@@ -13,8 +13,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     // WebSockets
-    implementation "org.java-websocket:java-websocket:$javaWebsocketVersion"
-    implementation 'com.neovisionaries:nv-websocket-client:2.5'
+    implementation "com.neovisionaries:nv-websocket-client:$websocketVersion"
 
     // Room
     implementation "android.arch.persistence.room:runtime:$roomVersion"
@@ -41,12 +40,12 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.leodroidcoder:generic-adapter:$genericAdapterVersion"
     implementation "com.github.philjay:mpandroidchart:$mpAndroidChartVersion"
-//    implementation "com.github.PhilJay:MPAndroidChart:$mpAndroidChartVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$mpAndroidChartVersion"
 
     // Testing
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation('com.nhaarman:mockito-kotlin:1.5.0') {
+    testImplementation("com.nhaarman:mockito-kotlin:$mockitoKotlinVersion") {
         exclude group: 'org.jetbrains.kotlin'
         exclude group: 'org.mockito'
     }
@@ -57,6 +56,6 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.splunk.mint:mint:$mintVersion"
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+    debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
 
 }

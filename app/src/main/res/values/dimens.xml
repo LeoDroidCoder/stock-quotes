@@ -2,25 +2,20 @@
 <resources>
 
     <!-- typical spacing between two views -->
-    <dimen name="spacing_huge">40dp</dimen>
-    <dimen name="spacing_large">22dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
-    <dimen name="spacing_tiny">4dp</dimen>
 
     <!-- typical sizes of views -->
-    <dimen name="button_toolbar_height">42dp</dimen>
+    <dimen name="item_height_normal">56dp</dimen>
 
     <!--font sizes -->
     <dimen name="font_size_small">14sp</dimen>
     <dimen name="font_size_normal">16sp</dimen>
     <dimen name="font_size_larger">17sp</dimen>
-    <dimen name="item_height_normal">56dp</dimen>
 
+    <!--Quotes column width in percent-->
     <item name="column_width_percent_symbol" format="float" type="dimen">0.3</item>
     <item name="column_width_percent_bid_ask" format="float" type="dimen">0.45</item>
     <item name="column_width_percent_spread" format="float" type="dimen">0.25</item>
-
-
 
 </resources>

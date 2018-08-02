@@ -8,7 +8,11 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Singleton
 
 /**
- * Created by leonid on 9/26/17.
+ * Navigation module.
+ * Provides navigation-related module objects.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 @Module
 class NavigationModule {
@@ -17,20 +21,22 @@ class NavigationModule {
     private val globalCiceroneRouter = Cicerone.create()
 
     /**
-     * Provides app with global router
+     * Provides global router, used to navigate between screens.
      *
-     * @since 0.1.0
      * @return app global router
+     *
+     * @since 1.0.0
      */
     @Provides
     @Singleton
     fun provideRouter(): Router = globalCiceroneRouter.router
 
     /**
-     * Provides app with global navigation holder
+     * Provides global navigation holder.
      *
-     * @since 0.1.0
      * @return app global navigation holder
+     *
+     * @since 1.0.0
      */
     @Provides
     @Singleton

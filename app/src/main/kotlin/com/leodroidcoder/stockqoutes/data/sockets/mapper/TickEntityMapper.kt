@@ -6,17 +6,20 @@ import com.leodroidcoder.stockqoutes.domain.entity.Tick
 
 /**
  * Mapper used to transform [TickEntity] into domain-layer entity [Tick].
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 object TickEntityMapper : ObjectMapper<TickEntity, Tick> {
 
     override fun mapTo(input: TickEntity): Tick {
         return Tick(
-            symbol = input.s,
-            bid = input.b,
-            bf = input.bf,
-            ask = input.a,
-            af = input.af,
-            spread = input.spr
+                symbol = input.s,
+                bid = input.b,
+                bf = input.bf,
+                ask = input.a,
+                af = input.af,
+                spread = input.spr
         )
     }
 }

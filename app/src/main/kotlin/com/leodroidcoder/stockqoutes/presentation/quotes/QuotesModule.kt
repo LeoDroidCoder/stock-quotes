@@ -1,11 +1,16 @@
 package com.leodroidcoder.stockqoutes.presentation.quotes
 
 import com.arellomobile.mvp.MvpPresenter
-import com.leodroidcoder.stockqoutes.presentation.quotes.QuotesMvpView
-import com.leodroidcoder.stockqoutes.presentation.quotes.QuotesPresenter
 import dagger.Binds
 import dagger.Module
 
+/**
+ * Quotes screen Dagger module.
+ * Used to provide screen-related dependencies, such as Presenter
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
+ */
 @Module
 abstract class QuotesModule {
 

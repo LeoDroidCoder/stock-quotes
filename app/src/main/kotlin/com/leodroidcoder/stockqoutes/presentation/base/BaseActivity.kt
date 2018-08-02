@@ -1,33 +1,32 @@
 package com.leodroidcoder.stockqoutes.presentation.base
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
-import com.leodroidcoder.stockqoutes.domain.common.ErrorCodes
-import com.leodroidcoder.stockqoutes.domain.common.ErrorMessageFactory
-import com.leodroidcoder.stockqoutes.presentation.common.navigation.BackButtonListener
+import com.leodroidcoder.stockqoutes.presentation.navigation.BackButtonListener
 import dagger.Lazy
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 
 /**
- * Created by leonid on 9/26/17.
+ * Base Activity class.
+ * Provides common functionality for all the Activities in application.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 abstract class BaseActivity<V : BaseMvpView, P : BasePresenter<V>> : MvpAppCompatActivity(), HasSupportFragmentInjector {
 
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
-    @Inject
-    lateinit var lazyPresenter: Lazy<P>
+    @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject lateinit var lazyPresenter: Lazy<P>
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -37,37 +36,29 @@ abstract class BaseActivity<V : BaseMvpView, P : BasePresenter<V>> : MvpAppCompa
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentInjector
     }
-
-    /**
-     * Retrieves error message by error code and shows it.
-     *
-     * @param errorCode error code
-     * @see [ErrorCodes]
-     * @see [ErrorMessageFactory]
-     */
-    fun handleError(errorCode: Int) {
-        //todo remove to data and replace with exception
-        showMessage(ErrorMessageFactory.create(this, if (isOnline()) errorCode else ErrorCodes.ERROR_INTERNET_CONNECTION))
-    }
-
-    /**
-     * Shows Toast message.
-     *
-     * @param message to show
-     */
-    fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun isOnline(): Boolean {
-        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-        return cm?.activeNetworkInfo?.isConnectedOrConnecting ?: false
-    }
 }
 
-infix fun FragmentManager.isBackPressedOnHolderWithId(holderId: Int) =
+/**
+ * Navigation helper extension function.
+ * Determines whether a "Back" button was pressed in a fragment container.
+ *
+ * @param holderId container resource id
+ * @see Router
+ *
+ * @since 1.0.0
+ */
+infix fun FragmentManager.isBackPressedOnHolderWithId(@IdRes holderId: Int) =
         findFragmentById(holderId).isBackPressed()
 
+/**
+ * Fragment extension function.
+ * Navigation helper function.
+ * Determines whether a "Back" button was pressed in a fragment.
+ *
+ * @see BackButtonListener
+ *
+ * @since 1.0.0
+ */
 fun Fragment?.isBackPressed(): Boolean =
         (this as? BackButtonListener)?.onBackButtonPressed() ?: false
 

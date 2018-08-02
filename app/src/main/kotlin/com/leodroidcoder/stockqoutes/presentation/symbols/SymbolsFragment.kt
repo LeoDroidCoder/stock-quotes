@@ -10,18 +10,24 @@ import com.leodroidcoder.stockqoutes.R
 import com.leodroidcoder.stockqoutes.presentation.base.BaseFragment
 import com.leodroidcoder.stockqoutes.presentation.symbols.adapter.SymbolsAdapter
 import kotlinx.android.synthetic.main.fragment_symbols.*
-import kotlinx.android.synthetic.main.view_bar.*
-import timber.log.Timber
 
 /**
- * Created by leonid on 9/26/17.
+ * Symbols screen Fragment.
+ * Shows available currency symbols,
+ * lets user to subscribe/unsubscribe from a mentioned currencies tick updates
+ *
+ * Receives data from the presenter [SymbolsPresenter] and shows it.
+ * Passes user interaction events to presenter.
+ *
+ * @author Leonid Ustenko (Leo.Droidcoder@gmail.com)
+ * @since 1.0.0
  */
 class SymbolsFragment : BaseFragment<SymbolsMvpView, SymbolsPresenter>(), SymbolsMvpView,
-    SymbolsAdapter.ItemCheckListener {
+        SymbolsAdapter.ItemCheckListener {
 
     @InjectPresenter lateinit var presenter: SymbolsPresenter
 
-    lateinit var adapter: SymbolsAdapter
+    private lateinit var adapter: SymbolsAdapter
 
     companion object {
 
@@ -29,9 +35,9 @@ class SymbolsFragment : BaseFragment<SymbolsMvpView, SymbolsPresenter>(), Symbol
          * Returns new instance of current fragment.
          * Supply it with the arguments if needed.
          *
-         * @since 0.1.0
-         *
          * @return new instance of current fragment.
+         *
+         * @since 0.1.0
          */
         fun newInstance() = SymbolsFragment()
     }
@@ -39,7 +45,7 @@ class SymbolsFragment : BaseFragment<SymbolsMvpView, SymbolsPresenter>(), Symbol
     @ProvidePresenter
     fun providePresenter(): SymbolsPresenter = lazyPresenter.get()
 
-    override fun getLayoutResId() =  R.layout.fragment_symbols
+    override fun getLayoutResId() = R.layout.fragment_symbols
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,35 +58,26 @@ class SymbolsFragment : BaseFragment<SymbolsMvpView, SymbolsPresenter>(), Symbol
     }
 
     private fun setupViews() {
-        btn_toolbar_back?.setOnClickListener { presenter.onBackPressed() }
-        tv_title?.text = getString(R.string.title_details_screen)
         rv_symbols?.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
         rv_symbols?.setHasFixedSize(true)
         rv_symbols?.layoutManager = LinearLayoutManager(context)
         rv_symbols?.adapter = adapter
     }
 
+    override fun setupToolbar(title: String, backEnabled: Boolean) {
+        setToolbar(getString(R.string.title_symbols), backEnabled)
+    }
+
+    /**
+     * Populate adapter with data.
+     *
+     * @since 1.0.0
+     */
     override fun onSymbols(symbols: List<Pair<String, Boolean>>) {
-        Timber.d("onSymbols $symbols")
         adapter.updateItems(symbols)
     }
 
     override fun onItemCheck(position: Int, checked: Boolean) {
-        presenter.symbolSubscriptionToggle(adapter.getItem(position).first, checked)
-    }
-
-    override fun onBackButtonPressed(): Boolean {
-        presenter.onBackPressed()
-        return true
-    }
-
-    /**
-     * An error occurred.
-     *
-     * @param errorCode code
-     * @see [ErrorCodes]
-     */
-    override fun onError(errorCode: Int) {
-        handleError(errorCode)
+        presenter.symbolSubscriptionCheck(adapter.getItem(position).first, checked)
     }
 }
